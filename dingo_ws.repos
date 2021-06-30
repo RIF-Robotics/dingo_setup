@@ -1,0 +1,25 @@
+repositories:
+  src/dingo:
+    type: git
+    url: git@github.com:RIF-Robotics/dingo.git
+    version: foxy
+  src/dingo_simulator:
+    type: git
+    url: git@github.com:RIF-Robotics/dingo_simulator.git
+    version: master
+  src/navigation2:
+    type: git
+    url: git@github.com:ros-planning/navigation2.git
+    version: galactic
+  src/rif-ros2-utils:
+    type: git
+    url: git@github.com:RIF-Robotics/rif-ros2-utils.git
+    version: master
+  src/robot_localization:
+    type: git
+    url: git@github.com:cra-ros-pkg/robot_localization.git
+    version: galactic
+  src/slam_toolbox:
+    type: git
+    url: git@github.com:SteveMacenski/slam_toolbox.git
+    version: galactic
