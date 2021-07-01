@@ -58,10 +58,11 @@ file. But this is what I do...
    Add the appropriate hook based on your shell:
    https://direnv.net/docs/hook.html
 
-2. Specify the `ROS_DOCKER_IMAGE_NAME` environment variable in a direnv
-   `.envrc` file:
+2. Specify the `ROS_VERSION` and `ROS_DOCKER_IMAGE_NAME` environment variable
+   in a direnv `.envrc` file:
 
         $ cd ~/ros2/dingo_ws
+        $ echo 'export ROS_VERSION="galactic"' > .envrc
         $ echo 'export ROS_DOCKER_IMAGE_NAME="rif/dingo_dev:galactic"' > .envrc
         $ direnv allow  # Required when you change the .envrc file
 
