@@ -2,7 +2,7 @@ repositories:
   dingo:
     type: git
     url: git@github.com:RIF-Robotics/dingo.git
-    version: foxy
+    version: galactic
   dingo_simulator:
     type: git
     url: git@github.com:RIF-Robotics/dingo_simulator.git
@@ -15,6 +15,10 @@ repositories:
     type: git
     url: git@github.com:RIF-Robotics/rif-ros2-utils.git
     version: master
+  rif_maps:
+    type: git
+    url: git@github.com:RIF-Robotics/rif_maps.git
+    version: main
   robot_localization:
     type: git
     url: git@github.com:cra-ros-pkg/robot_localization.git
