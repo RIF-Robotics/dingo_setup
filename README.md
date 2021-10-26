@@ -4,17 +4,17 @@ Setup instructions and docker files for Dingo.
 
 ## Install Dependencies:
 
-### git, docker, docker-compose
+- Docker: https://docs.docker.com/engine/install/ubuntu/
+- docker-compose: https://docs.docker.com/compose/install/
+- vcs: http://wiki.ros.org/vcstool
 
-### vcs
-
-http://wiki.ros.org/vcstool
+  I prefer `sudo apt install python3-vcstool` using the ROS repositories
 
 ## Setup Workspace and Clone dingo_setup
 
     $ mkdir -p ~/ros2/dingo_ws/src
     $ cd ~/ros2/dingo_ws
-    $ git clone git@github.com:cosmosrobotics/dingo_setup.git
+    $ git clone git@github.com:RIF-Robotics/dingo_setup.git
 
 ### Clone Repositories
 
