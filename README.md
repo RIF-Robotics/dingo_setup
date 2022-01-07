@@ -1,45 +1,60 @@
-# Dingo Setup
+# About
 
 Setup instructions and docker files for Dingo.
 
+# Dingo Setup
+
 ## Install Dependencies:
 
-- Docker: https://docs.docker.com/engine/install/ubuntu/
-- docker-compose: https://docs.docker.com/compose/install/
-- vcs: http://wiki.ros.org/vcstool
+* Docker: https://docs.docker.com/engine/install/ubuntu/
+* docker-compose: https://docs.docker.com/compose/install/
+* vcs: http://wiki.ros.org/vcstool
 
-  I prefer `sudo apt install python3-vcstool` using the ROS repositories
+I prefer `sudo apt install python3-vcstool` using the ROS repositories
 
-## Setup Workspace and Clone dingo_setup
+## First Time Instructions
 
-    $ mkdir -p ~/ros2/dingo_ws/src
-    $ cd ~/ros2/dingo_ws
-    $ git clone git@github.com:RIF-Robotics/dingo_setup.git
+1. Setup Workspace and Clone dingo_setup
 
-### Clone Repositories
+        $ mkdir -p ~/ros2/dingo_ws/src
+        $ cd ~/ros2/dingo_ws
+        $ git clone git@github.com:RIF-Robotics/dingo_setup.git
 
-    $ cd ~/ros2/dingo_ws/dingo_setup
-    $ vcs import ../src < dingo.repos
+2.  Clone Repositories
 
-### Build Docker Development Environment
+        $ cd ~/ros2/dingo_ws/dingo_setup
+        $ vcs import ../src < dingo.repos
 
-    $ cd dingo_setup
-    $ docker-compose build
+    **NOTE**: Regularly execute the following to keep the repositories up to
+    date:
 
-### Use Docker Development Environment
+        $ vcs pull ../src
+
+3. Build Docker development environment
+
+        $ cd ~/ros2/dingo_ws/dingo_setup
+        $ docker-compose build
+
+## Use Docker Development Environment
 
 Start Docker development environment and enter:
 
+    $ cd ~/ros2/dingo_ws/dingo_setup
     $ docker-compose up -d dev-nvidia
     $ docker exec -it dingo_galactic_nvidia /bin/bash
 
+**NOTE**: You can open as many terminals as needed with the last command. Each
+command will drop you inside the same container.
+
 Stop Docker container
 
+    $ cd ~/ros2/dingo_ws/dingo_setup
     $ docker-compose stop
 
 Remove container (will remove any of your changes in the Docker container, so
 don't do this unless you want to start fresh):
 
+    $ cd ~/ros2/dingo_ws/dingo_setup
     $ docker-compose down
 
 ## Dingo in Simulation (with a pre-built map)
@@ -65,15 +80,20 @@ button in rviz and clicking on the map.
 
 ## Dingo in Simulation (build a new map)
 
-1. Start Gazebo:
+1. Make sure the source code is built
+
+        $ cd ~/workspace
+        $ colcon build
+
+2. Start Gazebo:
 
         $ ros2 launch dingo_gazebo empty_world.launch.py
 
-2. Start the Nav2 stack with the slam toolbox enabled:
+3. Start the Nav2 stack with the slam toolbox enabled:
 
         $ ros2 launch dingo_navigation nav2.launch.py build_map:=True
 
-3. Start Rviz:
+4. Start Rviz:
 
         $ ros2 launch dingo_navigation rviz.launch.py
 
