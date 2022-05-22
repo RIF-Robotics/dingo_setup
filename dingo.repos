@@ -22,7 +22,7 @@ repositories:
   robot_localization:
     type: git
     url: git@github.com:cra-ros-pkg/robot_localization.git
-    version: galactic
+    version: galactic-devel
   ros2_control:
     type: git
     url: git@github.com:ros-controls/ros2_control.git
