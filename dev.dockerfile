@@ -1,11 +1,12 @@
-FROM osrf/ros:galactic-desktop
+FROM osrf/ros:galactic-desktop-focal
 
 MAINTAINER Kevin DeMarco
 ENV DEBIAN_FRONTEND noninteractive
 SHELL ["/bin/bash", "-c"]
 
 RUN apt-get update \
-    && apt-get install -y ros-galactic-gazebo-ros \
+    && apt-get install -y \
+       ros-galactic-gazebo-ros \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the "ros" user, add user to sudo group
@@ -18,23 +19,23 @@ RUN adduser --disabled-password --gecos '' $USERNAME \
     && adduser $USERNAME dialout \
     && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-# Build and install librealsense
-RUN mkdir -p /repos/3rd-party \
-    && cd /repos/3rd-party \
-    && git clone https://github.com/IntelRealSense/librealsense.git \
-    && mkdir -p ./librealsense/build \
-    && cd librealsense/build \
-    && cmake .. \
-    && make -j4 \
-    && make install
+# # Build and install librealsense
+# RUN mkdir -p /repos/3rd-party \
+#     && cd /repos/3rd-party \
+#     && git clone https://github.com/IntelRealSense/librealsense.git \
+#     && mkdir -p ./librealsense/build \
+#     && cd librealsense/build \
+#     && cmake .. \
+#     && make -j4 \
+#     && make install
 
-# librealsense dependencies?
-RUN apt-get update \
-    && apt-get install -y \
-        libglfw3-dev \
-        libgl1-mesa-dev \
-        libglu1-mesa-dev \
-    && rm -rf /var/lib/apt/lists/*
+# # librealsense dependencies?
+# RUN apt-get update \
+#     && apt-get install -y \
+#        libglfw3-dev \
+#        libgl1-mesa-dev \
+#        libglu1-mesa-dev \
+#     && rm -rf /var/lib/apt/lists/*
 
 USER $USERNAME
 
@@ -46,8 +47,9 @@ WORKDIR /home/$USERNAME/workspace
 COPY --chown=ros ./src ./src
 
 # Install code dependencies
-RUN sudo apt-get update \
-    && sudo rosdep update \
+RUN mkdir -p /home/$USERNAME/.ros \
+    && sudo apt-get update \
+    && rosdep update \
     && sudo rosdep install --from-paths src --ignore-src -r -y --rosdistro=galactic
 
 # Build code
