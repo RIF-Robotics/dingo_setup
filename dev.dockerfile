@@ -7,6 +7,8 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update \
     && apt-get install -y \
        ros-galactic-gazebo-ros \
+       ros-galactic-geometry-msgs \
+       ros-galactic-std-msgs \
     && rm -rf /var/lib/apt/lists/*
 
 # Create the "ros" user, add user to sudo group
